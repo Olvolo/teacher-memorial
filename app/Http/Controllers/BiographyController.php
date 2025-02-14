@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Biography;
+use Illuminate\Contracts\View\View;
 
 class BiographyController extends Controller
 {
-    //
+    public function show(): View
+    {
+        return view('biography.show', [
+            'biography' => Biography::query()->first()
+        ]);
+    }
 }
