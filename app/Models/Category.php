@@ -9,26 +9,23 @@ use Illuminate\Support\Str;
 
 /**
  * @property mixed $id
+ * @method static create(array $all)
  */
 class Category extends Model
 {
     use HasFactory;
 
-    // Таблица, связанная с моделью
     protected $table = 'categories';
 
-    // Поля, которые можно массово заполнять
     protected $fillable = [
         'name', // Название категории
         'slug', // Слаг (например, для SEO-friendly URL)
         'description', // Описание категории
     ];
 
-    // Если нужно, можно указать дату создания и обновления
-    const CREATED_AT = 'created_at';
+     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-// Генерация слага перед сохранением
     public static function boot(): void
     {
         parent::boot();

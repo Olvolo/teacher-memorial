@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
-    // Показать список категорий
-    public function index()
+
+    public function index(): View
     {
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
 
-    // Форма создания категории
-    public function create()
+    public function create(): View
     {
         return view('categories.create');
     }
 
-    // Сохранение новой категории
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required|unique:categories|max:255',
@@ -33,20 +33,17 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Категория создана');
     }
 
-    // Показать конкретную категорию
-    public function show(Category $category)
+   public function show(Category $category): View
     {
         return view('categories.show', compact('category'));
     }
 
-    // Форма редактирования категории
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         return view('categories.edit', compact('category'));
     }
 
-    // Обновление категории
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category): RedirectResponse
     {
         $request->validate([
             'name' => 'required|max:255|unique:categories,name,' . $category->id,
@@ -58,8 +55,7 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Категория обновлена');
     }
 
-    // Удаление категории
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Категория удалена');
