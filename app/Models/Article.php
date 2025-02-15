@@ -11,6 +11,7 @@ class Article extends Model
 {
     use HasFactory;
 
+    public mixed $id;
     protected $table = 'articles';
 
     protected $fillable = [
@@ -30,6 +31,14 @@ class Article extends Model
                 $article->slug = Str::slug($article->title);
             }
         });
+    }
+
+    public static function count()
+    {
+    }
+
+    public static function create(array $validated)
+    {
     }
 
     public function category(): BelongsTo

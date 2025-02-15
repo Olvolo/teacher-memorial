@@ -13,4 +13,16 @@ class Biography extends Model
     protected $fillable = [
         'content',
     ];
+
+    public static function first()
+    {
+    }
+
+    public static function create(array $validated)
+    {
+    }
+
+    public static function exists()
+    {
+    }
 }

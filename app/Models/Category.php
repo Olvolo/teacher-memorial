@@ -36,6 +36,11 @@ class Category extends Model
             }
         });
     }
+
+    public static function count()
+    {
+    }
+
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
