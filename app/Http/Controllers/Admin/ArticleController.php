@@ -16,13 +16,11 @@ class ArticleController extends Controller
         $articles = Article::with('category')->latest()->paginate(10);
         return view('admin.articles.index', compact('articles'));
     }
-
     public function create(): View
     {
         $categories = Category::all();
         return view('admin.articles.create', compact('categories'));
     }
-
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -32,17 +30,14 @@ class ArticleController extends Controller
             'slug' => 'nullable|unique:articles|max:255',
             'description' => 'nullable|string|max:500',
         ]);
-
         Article::create($validated);
         return redirect()->route('admin.articles.index')->with('success', 'Статья успешно создана');
     }
-
     public function edit(Article $article): View
     {
         $categories = Category::all();
         return view('admin.articles.edit', compact('article', 'categories'));
     }
-
     public function update(Request $request, Article $article): RedirectResponse
     {
         $validated = $request->validate([
@@ -52,11 +47,9 @@ class ArticleController extends Controller
             'slug' => 'nullable|unique:articles,slug,' . $article->id,
             'description' => 'nullable|string|max:500',
         ]);
-
         $article->update($validated);
         return redirect()->route('admin.articles.index')->with('success', 'Статья успешно обновлена');
     }
-
     public function destroy(Article $article): RedirectResponse
     {
         $article->delete();

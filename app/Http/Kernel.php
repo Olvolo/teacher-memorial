@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -10,7 +11,6 @@ use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -73,6 +73,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'auth' => Authenticate::class,
+        'admin' => AdminMiddleware::class,
         'auth.basic' => AuthenticateWithBasicAuth::class,
         'auth.session' => AuthenticateSession::class,
         'cache.headers' => SetCacheHeaders::class,
@@ -82,6 +83,5 @@ class Kernel extends HttpKernel
         'signed' => ValidateSignature::class,
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
-        'admin' => AdminMiddleware::class,
     ];
 }
